@@ -1,0 +1,195 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#080809"><title>Teoh Sheak Yao — Digital Business Card</title><meta name="description" content="Teoh Sheak Yao — UM PhD Researcher, Foreign Investment, Practice Manager at Yes Financial Bhd / Yes Trustee Bhd."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@1,500;1,600&display=swap" rel="stylesheet"><script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script><script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script><style>
+:root{--orange:#F25A1A;--cream:#FFF1DE;--black:#080809;--line:rgba(255,255,255,.17);--mono:'DM Mono',monospace;--sans:'DM Sans',Arial,sans-serif;--serif:'Playfair Display',Georgia,serif}*{box-sizing:border-box}html{background:var(--black);color:#f6f1eb}body{margin:0;background:#080809;font:400 15px/1.5 var(--sans);overflow-x:hidden}button,input{font:inherit}a{color:inherit}#ambient{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5}#intro{position:fixed;inset:0;z-index:100;background:#080809;overflow:hidden;isolation:isolate}#intro[hidden]{display:none}#scene3d{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3}.scene{position:absolute;inset:0;display:none;overflow:hidden;isolation:isolate}.scene.active{display:flex}.scene1{background:var(--orange);color:#080809;align-items:center;justify-content:center}.intro-center{position:relative;width:min(90vw,1250px)}.giant{font:900 clamp(3.4rem,11vw,11rem)/.85 var(--sans);letter-spacing:-.09em;text-transform:uppercase;position:relative;z-index:2;max-width:1100px}.giant span{display:block}.ghost{position:absolute;inset:0;color:transparent;-webkit-text-stroke:2px rgba(0,0,0,.35);pointer-events:none}.intro-serif{font:italic 500 clamp(1.3rem,3.8vw,3.8rem)/1.15 var(--serif);color:var(--cream);margin-top:36px}.corner{position:absolute;font:500 10px/1.7 var(--mono);letter-spacing:.12em;text-transform:uppercase;z-index:9}.c-tl{top:36px;left:36px}.c-tr{top:36px;right:36px;text-align:right}.c-bl{bottom:34px;left:36px}.c-br{bottom:34px;right:36px;text-align:right}.scene2{background:var(--cream);color:#111;align-items:center;justify-content:center}.slab{position:absolute;width:180vw;height:34vh;left:-40vw;top:30%;background:var(--orange);transform:rotate(-23deg) translateX(-150%);box-shadow:0 0 70px rgba(242,90,26,.25)}.slab.alt{background:#111;height:12vh;top:52%}.scene2 .phrase{position:relative;font:italic 500 clamp(3.6rem,11vw,10rem)/1 var(--serif);letter-spacing:-.055em;z-index:2}.underline{position:absolute;bottom:-22px;left:0;width:100%;height:28px;overflow:visible}.underline path{stroke:var(--orange);stroke-width:9;fill:none;stroke-linecap:round;stroke-dasharray:1200;stroke-dashoffset:1200}.scene3{background:radial-gradient(ellipse at center,#181419 0%,#050507 68%);color:#fff}.scene3 .orbit-title{position:absolute;top:20%;width:100%;text-align:center;font:600 12px var(--mono);letter-spacing:.3em}.scene4{background:#ed241c;color:#fff;align-items:center;justify-content:center}.slice-wrap{position:relative;font:900 clamp(4rem,16vw,16rem)/.85 var(--sans);letter-spacing:-.085em;white-space:nowrap}.slice{display:block}.slice.top{clip-path:polygon(0 0,100% 0,100% 43%,0 58%)}.slice.bottom{position:absolute;inset:0;clip-path:polygon(0 58%,100% 43%,100% 100%,0 100%)}.sweep{position:absolute;inset:-20%;width:13%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.8),transparent);transform:skew(-28deg) translateX(-300%);filter:blur(7px);pointer-events:none}.license-sub{position:absolute;bottom:20%;left:0;right:0;text-align:center;font:700 clamp(1rem,3vw,2.3rem) var(--mono);letter-spacing:.15em}.scene5{background:#08090d;align-items:center;justify-content:center}.dotgrid{position:absolute;inset:0;background-image:radial-gradient(#555 1px,transparent 1px);background-size:24px 24px;opacity:.25}.nodes{width:min(90vw,980px);height:420px;position:relative}.wires{position:absolute;inset:0;width:100%;height:100%;overflow:visible}.wires path{stroke:#f4423b;stroke-width:2;fill:none;filter:drop-shadow(0 0 7px #f4423b);stroke-dasharray:1100;stroke-dashoffset:1100}.node{position:absolute;width:clamp(175px,27vw,285px);min-height:120px;padding:24px;background:linear-gradient(145deg,#22232d,#101116);border:1px solid #e34445;border-radius:13px;box-shadow:0 20px 55px #000,0 0 30px #f22a3422;display:flex;flex-direction:column;justify-content:center;transform:rotate(-7deg)}.node small{font:10px var(--mono);color:#f26a65;letter-spacing:.2em;margin-bottom:15px}.node strong{font-size:clamp(17px,2.5vw,25px);line-height:1.12}.node:nth-of-type(1){left:0;top:18px}.node:nth-of-type(2){right:0;top:125px;transform:rotate(7deg)}.node:nth-of-type(3){left:22%;bottom:0;transform:rotate(-4deg)}#star{position:fixed;left:25px;top:25px;width:66px;height:66px;z-index:160;pointer-events:none;filter:drop-shadow(0 0 13px #f25a1a55);transform-origin:center}#star line{stroke:#f17b59;stroke-width:6;stroke-linecap:round}#skip{position:fixed;right:25px;top:28px;z-index:170;border:1px solid #ffffff65;background:#1119;color:#fff;border-radius:999px;padding:12px 20px;cursor:pointer;font:500 11px var(--mono);letter-spacing:.12em;backdrop-filter:blur(12px)}#skip:focus-visible{outline:3px solid var(--orange)}#timecode{position:fixed;bottom:24px;right:28px;z-index:160;color:#fff;font:12px var(--mono)}#flash{position:absolute;inset:0;background:#fff;z-index:12;pointer-events:none;opacity:0}#intro .hudwhite{color:#fff}#intro .hudblack{color:#111}
+/* Final card */.wrap{position:relative;z-index:2;width:min(100%,510px);margin:0 auto;padding:75px 22px 70px;text-align:center;transform-style:preserve-3d;will-change:transform}.hero{position:relative}.slot{height:180px;display:grid;place-items:center}.avatar{position:relative;width:136px;height:136px;filter:drop-shadow(0 12px 25px #f25a1a30)}.photo{position:absolute;inset:0;border-radius:50%;overflow:hidden;background:#1a1a1d;display:grid;place-items:center;font:700 30px var(--mono);color:var(--orange)}.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.ring{position:absolute;inset:-9px;width:calc(100% + 18px);height:calc(100% + 18px);pointer-events:none}.ring circle{fill:none;stroke:var(--orange);stroke-width:1.5}.ring.b{inset:-22px;width:calc(100% + 44px);height:calc(100% + 44px);animation:spin 30s linear infinite}.ring.b circle{stroke:#ffffff40;stroke-dasharray:2 8}@keyframes spin{to{transform:rotate(360deg)}}h1.name{font:900 clamp(28px,7.5vw,40px)/1 var(--sans);letter-spacing:-.05em;margin:8px 0 0}.title{font:italic 500 20px/1.4 var(--serif);color:#ffb08d;margin:18px 0 0}.faculty{font:10px/1.6 var(--mono);letter-spacing:.13em;color:#aaa;text-transform:uppercase}.company{display:flex;justify-content:center;align-items:center;gap:12px;margin:18px auto}.company img{max-width:90px;max-height:40px;object-fit:contain}.company span{font-size:13px;font-weight:600}.label{display:flex;align-items:center;gap:12px;justify-content:center;margin:30px 0 13px;font:10px var(--mono);letter-spacing:.2em;text-transform:uppercase;color:#aaa}.label:before,.label:after{content:'';height:1px;flex:1;background:#ffffff2a}.chips,.tags{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}.chip,.pill{border:1px solid #ffffff36;background:#ffffff09;border-radius:999px;padding:9px 13px;font-size:12px}.chip{font:600 12px var(--mono)}.pill.lic{border-color:#f25a1a80;background:#f25a1a14}.pill.lic:before{content:'●';color:var(--orange);margin-right:8px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:30px}.stat{border:1px solid var(--line);border-radius:15px;padding:14px 5px;background:#ffffff08}.stat b{display:block;font:700 29px var(--mono);color:var(--orange)}.stat span{font:10px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:#aaa}.actions{margin-top:30px}.btn-primary,.btn-wa{display:flex;width:100%;min-height:62px;justify-content:center;align-items:center;gap:12px;border:0;border-radius:16px;cursor:pointer;font-weight:800}.btn-primary{background:var(--orange);color:#111;box-shadow:0 16px 35px #f25a1a42}.btn-wa{background:#ffffff12;color:#fff;border:1px solid #ffffff55}.btn-primary svg,.btn-wa svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.status{font:11px var(--mono);color:#aaa;min-height:16px}.reveal{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .5s,opacity .5s}.reveal.open{grid-template-rows:1fr;opacity:1;margin-top:12px}.reveal>.inner{min-height:0;overflow:hidden}.hi{padding:20px;text-align:left;background:#ffffff0a;border:1px solid var(--line);border-radius:17px}.hi p{font-size:14px;color:#ccc}.hi label{display:block;font:11px var(--mono);text-transform:uppercase;letter-spacing:.12em;color:#aaa;margin:12px 0 6px}.hi input{width:100%;padding:14px;background:#090909;color:#fff;border:1px solid #ffffff44;border-radius:10px;font-size:16px}.hi input.bad{border-color:#f33}.btn-wa{margin-top:12px}.quick{display:flex;justify-content:center;gap:17px;margin-top:28px}.qi{display:flex;flex-direction:column;align-items:center;gap:8px;text-decoration:none;font:10px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#aaa}.qi i{display:grid;place-items:center;width:54px;height:54px;border:1px solid var(--line);border-radius:50%;background:#ffffff0a}.qi svg{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}.direct{margin-top:27px;font:12px/1.9 var(--mono);color:#aaa}.direct a{text-decoration:none;border-bottom:1px solid #ffffff44}.foot{margin-top:32px;font:10px/1.8 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#888}.final-top{position:relative;z-index:2;text-align:center;padding-top:28px;color:#777;font:10px var(--mono);letter-spacing:.2em;text-transform:uppercase}.wrap .rv,.wrap .chip,.wrap .pill,.wrap .stat,.wrap .rise,.wrap .avatar{will-change:transform,opacity}@media(max-width:600px){.c-tl,.c-tr{top:115px}.c-tl,.c-bl{left:18px}.c-tr,.c-br{right:18px}.corner{font-size:8px}.giant{font-size:clamp(3.4rem,14vw,7rem)}.nodes{height:460px}.node{width:62%;min-height:100px}.node:nth-of-type(1){left:0;top:15px}.node:nth-of-type(2){right:0;top:170px}.node:nth-of-type(3){left:6%;bottom:0}.license-sub{bottom:30%}.quick{gap:10px}.qi i{width:50px;height:50px}#star{width:49px;height:49px;left:15px;top:15px}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style></head><body><canvas id="ambient" aria-hidden="true"></canvas><svg id="star" viewBox="0 0 100 100" aria-hidden="true"></svg><button id="skip" type="button">SKIP INTRO ↗</button><div id="timecode" aria-hidden="true">00:00:00</div><div id="intro" aria-label="Animated introduction"><div class="scene scene1 active" id="s1"><div class="corner c-tl hudblack">TSY / IDENTITY SYSTEM<br>01 — INTRODUCTION</div><div class="corner c-tr hudblack">YES FINANCIAL<br>YES TRUSTEE</div><div class="intro-center"><div class="giant" id="bigName"><span>TEOH</span><span>SHEAK YAO</span></div><div class="giant ghost" aria-hidden="true"><span>TEOH</span><span>SHEAK YAO</span></div><div class="giant ghost" aria-hidden="true"><span>TEOH</span><span>SHEAK YAO</span></div><div class="intro-serif">Foreign Investment · Practice Manager</div></div><div class="corner c-bl hudblack">KUALA LUMPUR / MALAYSIA</div><div class="corner c-br hudblack">MOTION ID / 2026</div></div><div class="scene scene2" id="s2"><div class="slab"></div><div class="slab alt"></div><div class="phrase">on purpose.<svg class="underline" viewBox="0 0 700 40" preserveAspectRatio="none"><path d="M8 29 Q 190 5 380 25 T 695 15"/></svg></div><div class="corner c-bl hudblack">INTENTIONAL CONNECTIONS / 02</div></div><div class="scene scene3" id="s3"><div class="orbit-title">CONNECTED BY DESIGN</div><div class="corner c-tl hudwhite">YES FINANCIAL / YES TRUSTEE<br>GEOMETRY / ACTIVE</div><div class="corner c-br hudwhite">PARTICLE FIELD / 03</div></div><canvas id="scene3d" aria-hidden="true"></canvas><div class="scene scene4" id="s4"><div class="slice-wrap"><div class="slice top">LICENSED.</div><div class="slice bottom" aria-hidden="true">LICENSED.</div><div class="sweep"></div></div><div class="license-sub">BNM · SC · FIMM</div><div class="corner c-bl hudwhite">REGULATED / CREDENTIALLED / 04</div></div><div class="scene scene5" id="s5"><div class="dotgrid"></div><div class="nodes"><svg class="wires" viewBox="0 0 980 420" preserveAspectRatio="none"><path d="M210 92 C 430 20 550 220 790 190"/><path d="M790 190 C 690 330 520 290 350 370"/><path d="M210 92 C 160 300 250 350 350 370"/></svg><div class="node"><small>01 / ACADEMIA</small><strong>PhD Researcher (UM)</strong></div><div class="node"><small>02 / INVESTMENT</small><strong>Foreign Investment</strong></div><div class="node"><small>03 / SERVICES</small><strong>Trustee Services</strong></div></div><div class="corner c-bl hudwhite">NETWORK / 05</div></div><div id="flash"></div></div><div class="final-top">TSY / DIGITAL IDENTITY — CONNECT</div><main class="wrap" id="cardWrap">
+
+  <section class="hero">
+    <div class="slot" id="slot">
+      <div class="avatar" id="avatar">
+        <svg class="ring b" viewBox="0 0 172 172" aria-hidden="true"><circle cx="86" cy="86" r="84"/></svg>
+        <svg class="ring a" viewBox="0 0 148 148" aria-hidden="true"><circle cx="74" cy="74" r="68"/></svg>
+        <div class="photo">
+          <span aria-hidden="true">TSY</span>
+          <img src="photo.jpg" alt="Portrait of Teoh Sheak Yao" id="photo" onerror="this.style.display='none'">
+        </div>
+      </div>
+    </div>
+
+    <h1 class="name" id="name" data-text="TEOH SHEAK YAO" aria-label="Teoh Sheak Yao"></h1>
+    <div class="title" id="title">UM PhD Researcher / Foreign Investment / Practice Manager</div>
+    <p class="faculty rv" id="faculty">Faculty of Business &amp; Economics (FBE)</p>
+
+    <div class="company rv" id="company">
+      <img src="logo.png" alt="Company logo" id="logo" onerror="this.style.display='none'">
+      <span>Yes Financial Bhd / Yes Trustee Bhd</span>
+    </div>
+  </section>
+
+  <section class="cascade" id="cascade">
+    <div class="label">Credentials</div>
+    <div class="chips">
+      <span class="chip" style="--i:0">CMSRL</span>
+      <span class="chip" style="--i:1">FAR</span>
+      <span class="chip" style="--i:2">IFAR</span>
+      <span class="chip" style="--i:3">RFP</span>
+      <span class="chip" style="--i:4">ShRFP</span>
+      <span class="chip" style="--i:5">MBA</span>
+    </div>
+
+    <div class="label">Licences &amp; roles</div>
+    <div class="tags">
+      <span class="pill lic" style="--i:6">Accredited HRDC Trainer</span>
+      <span class="pill lic" style="--i:7">Licensed by Bank Negara Malaysia</span>
+      <span class="pill lic" style="--i:8">Licensed by Securities Commission Malaysia</span>
+      <span class="pill lic" style="--i:9">Licensed by FIMM</span>
+      <span class="pill" style="--i:10">Member, Malaysia Financial Planning Council (MFPC)</span>
+      <span class="pill" style="--i:11">Member, Association of Financial Advisers (AFA)</span>
+      <span class="pill" style="--i:12">President, Strategic Planning Committee (SPC)</span>
+      <span class="pill" style="--i:13">President, Economic Dialogue Podcast Committee (EDPC)</span>
+      <span class="pill" style="--i:14">Committee Member, Persatuan Cheng Hoe Tong Seberang Perai and Selangor</span>
+      <span class="pill" style="--i:15">Member, United Nations Association Malaysia (UNAM)</span>
+    </div>
+  </section>
+
+  <section class="stats rv" id="stats" aria-label="At a glance">
+    <div class="stat"><b data-to="6">06</b><span>Credentials</span></div>
+    <div class="stat"><b data-to="3">03</b><span>Licences</span></div>
+    <div class="stat"><b data-to="10">10</b><span>Roles &amp; memberships</span></div>
+  </section>
+
+  <section class="actions">
+    <div class="rise" style="--d:0s">
+      <button class="btn-primary" id="save" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true" id="saveIcon"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>
+        <span id="saveLabel">Save my contact</span>
+      </button>
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+    </div>
+
+    <div class="reveal" id="hiWrap" inert>
+      <div class="inner">
+        <form class="hi" id="hiForm" novalidate>
+          <p>Thank you. May I know who I am speaking with? I will be glad to reply on WhatsApp.</p>
+          <label for="hiName">Your name</label>
+          <input id="hiName" name="name" type="text" autocomplete="name" placeholder="e.g. Aisyah Rahman" maxlength="80">
+          <label for="hiCo">Company / Event</label>
+          <input id="hiCo" name="organization" type="text" autocomplete="organization" placeholder="e.g. Financial Planning Forum" maxlength="100">
+          <button class="btn-wa" type="submit">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            Say hi on WhatsApp
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <nav class="quick rise" style="--d:.12s" aria-label="Contact links">
+      <a class="qi" href="tel:+60124853707" aria-label="Call +60 12 485 3707">
+        <i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></i>Call
+      </a>
+      <a class="qi" href="mailto:Joshuateoh485@yahoo.com" aria-label="Email Joshuateoh485@yahoo.com">
+        <i><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></i>Email
+      </a>
+      <a class="qi" href="https://www.linkedin.com/in/teoh-sheak-yao-22194b133" target="_blank" rel="noopener" aria-label="LinkedIn profile">
+        <i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></i>LinkedIn
+      </a>
+      <a class="qi" href="https://www.tiktok.com/@teohsheakyao" target="_blank" rel="noopener" aria-label="TikTok profile">
+        <i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg></i>TikTok
+      </a>
+    </nav>
+
+    <p class="direct rise" style="--d:.2s">
+      <a href="tel:+60124853707">+60 12-485 3707</a><br>
+      <a href="mailto:Joshuateoh485@yahoo.com">Joshuateoh485@yahoo.com</a>
+    </p>
+    <p class="foot rise" style="--d:.28s">Thank you for connecting<br>No ads · No trackers</p>
+  </section>
+
+</main><script>
+(function(){'use strict';const $=s=>document.querySelector(s),$$=s=>Array.from(document.querySelectorAll(s));const root=document.documentElement,reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;const star=$('#star');for(let i=0;i<12;i++){let a=i*Math.PI/6,el=document.createElementNS('http://www.w3.org/2000/svg','line');el.setAttribute('x1',50+19*Math.cos(a));el.setAttribute('y1',50+19*Math.sin(a));el.setAttribute('x2',50+43*Math.cos(a));el.setAttribute('y2',50+43*Math.sin(a));star.appendChild(el)}$('#name').textContent='TEOH SHEAK YAO';let renderer,scene,camera,particleGroup,burst,ambientRenderer,ambientScene,ambientCamera,ambientParticles;let running=true,done=false,start=performance.now(),elapsed=0,raf=0;function setup3d(){if(!window.THREE)return;try{const THREE=window.THREE;renderer=new THREE.WebGLRenderer({canvas:$('#scene3d'),alpha:true,antialias:false,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio||1,2));renderer.setSize(innerWidth,innerHeight);scene=new THREE.Scene();camera=new THREE.PerspectiveCamera(55,innerWidth/innerHeight,.1,100);camera.position.z=6;particleGroup=new THREE.Group();scene.add(particleGroup);let pos=[],colors=[];for(let i=0;i<780;i++){let u=Math.random()*Math.PI*2,v=Math.random()*Math.PI*2,r=1.75+.12*Math.sin(v*9);let x=(r+.58*Math.cos(v))*Math.cos(u),y=(r+.58*Math.cos(v))*Math.sin(u),z=.58*Math.sin(v);let dx=(Math.random()-.5)*.17,dy=(Math.random()-.5)*.17,dz=(Math.random()-.5)*.17;pos.push(x,y,z,x+dx,y+dy,z+dz);let hot=i%9===0;for(let j=0;j<2;j++)colors.push(hot?1:.78,hot?.26:.76,hot?.2:.88)}let geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));geo.setAttribute('color',new THREE.Float32BufferAttribute(colors,3));particleGroup.add(new THREE.LineSegments(geo,new THREE.LineBasicMaterial({vertexColors:true,transparent:true,opacity:.85,blending:THREE.AdditiveBlending,depthWrite:false})));let bp=[];for(let i=0;i<420;i++){let a=Math.random()*Math.PI*2,b=Math.acos(Math.random()*2-1),r=.15+Math.random()*.7;let x=Math.sin(b)*Math.cos(a),y=Math.sin(b)*Math.sin(a),z=Math.cos(b);bp.push(x*r,y*r,z*r,x*(r+.6),y*(r+.6),z*(r+.6))}let bg=new THREE.BufferGeometry();bg.setAttribute('position',new THREE.Float32BufferAttribute(bp,3));burst=new THREE.LineSegments(bg,new THREE.LineBasicMaterial({color:0xff775b,transparent:true,opacity:0,blending:THREE.AdditiveBlending}));scene.add(burst);ambientRenderer=new THREE.WebGLRenderer({canvas:$('#ambient'),alpha:true,antialias:false,powerPreference:'low-power'});ambientRenderer.setPixelRatio(Math.min(devicePixelRatio||1,2));ambientRenderer.setSize(innerWidth,innerHeight);ambientScene=new THREE.Scene();ambientCamera=new THREE.PerspectiveCamera(65,innerWidth/innerHeight,.1,100);ambientCamera.position.z=8;let ap=[];for(let i=0;i<200;i++)ap.push((Math.random()-.5)*14,(Math.random()-.5)*18,(Math.random()-.5)*8);let ag=new THREE.BufferGeometry();ag.setAttribute('position',new THREE.Float32BufferAttribute(ap,3));ambientParticles=new THREE.Points(ag,new THREE.PointsMaterial({color:0xf25a1a,size:.028,transparent:true,opacity:.75}));ambientScene.add(ambientParticles)}catch(e){console.warn('3D fallback',e)}}function resize(){for(let pair of [[renderer,camera],[ambientRenderer,ambientCamera]]){if(pair[0]){pair[0].setSize(innerWidth,innerHeight);pair[1].aspect=innerWidth/innerHeight;pair[1].updateProjectionMatrix()}}}addEventListener('resize',resize);function loop(now){if(!running)return;let t=(now-start)/1000;elapsed=t;$('#timecode').textContent='00:'+String(Math.floor(t)).padStart(2,'0')+':'+String(Math.floor((t%1)*30)).padStart(2,'0');if(particleGroup){particleGroup.rotation.y+=.008;particleGroup.rotation.x+=.003;let active=$('#s3').classList.contains('active');$('#scene3d').style.opacity=active?'1':'0';if(burst){let bt=Math.max(0,(t-4.55)/.48);burst.scale.setScalar(1+bt*5);burst.material.opacity=active&&bt>0?Math.max(0,1-bt):0}renderer.render(scene,camera);ambientParticles.rotation.y+=.0007;ambientParticles.rotation.x+=.0002;ambientRenderer.render(ambientScene,ambientCamera)}raf=requestAnimationFrame(loop)}function revealFinal(){if(done)return;done=true;$('#intro').hidden=true;$('#skip').hidden=true;$('#timecode').hidden=true;document.body.style.overflow='auto';$('#scene3d').style.display='none';if(window.gsap&&!reduce){gsap.fromTo('.avatar',{opacity:0,z:-650,scale:.25,rotationY:-80},{opacity:1,z:0,scale:1,rotationY:0,duration:1.05,ease:'back.out(1.4)'});gsap.fromTo(['.name','.title','.faculty','.company'],{opacity:0,y:55,filter:'blur(12px)'},{opacity:1,y:0,filter:'blur(0px)',duration:.75,stagger:.12,ease:'power3.out'});gsap.fromTo('.chip,.pill',{opacity:0,y:32,scale:.7},{opacity:1,y:0,scale:1,stagger:.045,duration:.6,ease:'back.out(1.7)',delay:.25});gsap.fromTo('.stat,.rise',{opacity:0,y:70},{opacity:1,y:0,duration:.8,stagger:.1,ease:'back.out(1.5)',delay:.4})}root.classList.add('done')}function startMotion(){if(reduce){revealFinal();return}document.body.style.overflow='hidden';if(!window.gsap){revealFinal();return}const g=window.gsap;g.set('.ghost',{opacity:0});g.set('.intro-serif',{opacity:0,y:80});g.set('.giant:not(.ghost)',{x:-innerWidth,rotation:-9,scale:1.3});g.set('.scene2 .phrase',{opacity:0,scale:1.7,rotation:8});g.set('.slice-wrap',{scale:2.5,opacity:0});g.set('.license-sub',{opacity:0,y:60});g.set('.node',{opacity:0,scale:.4,y:130});g.set('.scene3 .orbit-title',{opacity:0});const tl=g.timeline({onComplete:revealFinal});function cut(id){return()=>{$$('.scene').forEach(s=>s.classList.remove('active'));$(id).classList.add('active')}}tl.call(cut('#s1'),[],0).to('.giant:not(.ghost)',{x:0,rotation:0,scale:1,duration:.52,ease:'back.out(2.4)'},.15).to('.ghost',{opacity:.65,x:26,y:-13,duration:.09},.28).to('.ghost',{opacity:0,x:80,y:-38,duration:.36},.48).to('.intro-serif',{opacity:1,y:0,duration:.55,ease:'power4.out'},.72).to('#s1',{filter:'blur(13px)',x:-120,duration:.19,ease:'power4.in'},1.48).call(cut('#s2'),[],1.64).fromTo('#s2',{x:innerWidth*.15},{x:0,duration:.17},1.64).to('.slab',{x:'180%',duration:.7,ease:'power4.inOut',stagger:.12},1.7).to('.scene2 .phrase',{opacity:1,scale:1,rotation:0,duration:.52,ease:'back.out(1.8)'},1.92).to('.underline path',{strokeDashoffset:0,duration:.6,ease:'power2.out'},2.18).to('#s2',{x:-innerWidth*.9,filter:'blur(20px)',duration:.23,ease:'power4.in'},2.77).call(cut('#s3'),[],3.02).to('.scene3 .orbit-title',{opacity:1,duration:.3},3.18).fromTo('#scene3d',{opacity:0,scale:.3},{opacity:1,scale:1,duration:.65,ease:'power3.out'},3.12).to('#s3',{scale:1.25,duration:1.5,ease:'power1.in'},3.1).to('#flash',{opacity:.8,duration:.07,yoyo:true,repeat:1},4.58).call(cut('#s4'),[],4.78).to('.slice-wrap',{scale:1,opacity:1,duration:.28,ease:'back.out(2.5)'},4.8).to('.slice.top',{x:-20,y:-12,duration:.18},5.14).to('.slice.bottom',{x:25,y:12,duration:.18},5.14).to('.sweep',{x:'1050%',duration:.35},5.18).to('.license-sub',{opacity:1,y:0,duration:.26},5.25).to('#s4',{x:-innerWidth,filter:'blur(30px)',duration:.25,ease:'power4.in'},5.79).call(cut('#s5'),[],6.06).to('.wires path',{strokeDashoffset:0,duration:.6,stagger:.1},6.15).to('.node',{opacity:1,scale:1,y:0,duration:.5,stagger:.16,ease:'back.out(1.8)'},6.22).to('.node',{y:'-=13',duration:.55,stagger:.08,yoyo:true,repeat:1,ease:'sine.inOut'},7.08).to('.node',{x:()=>Math.random()*900-450,y:()=>Math.random()*800-400,rotation:()=>Math.random()*140-70,scale:.1,opacity:0,filter:'blur(25px)',duration:.48,stagger:.04,ease:'power4.in'},8.02).to('#flash',{opacity:1,duration:.09,yoyo:true,repeat:1},8.48).call(revealFinal,[],8.65);g.to('#star',{rotation:360,duration:13,repeat:-1,ease:'none'});g.to('#star',{scale:1.18,duration:.5,repeat:-1,yoyo:true,ease:'sine.inOut'})}$('#skip').addEventListener('click',revealFinal);let pointer={x:0,y:0};addEventListener('pointermove',e=>{if(done&&!reduce){pointer.x=(e.clientX/innerWidth-.5)*2;pointer.y=(e.clientY/innerHeight-.5)*2;$('#star').style.translate=(pointer.x*4)+'px '+(pointer.y*4)+'px';$('#cardWrap').style.transform=`perspective(1200px) rotateY(${pointer.x*2.8}deg) rotateX(${-pointer.y*2.5}deg)`}},{passive:true});addEventListener('deviceorientation',e=>{if(done&&!reduce&&e.gamma!=null)$('#cardWrap').style.transform=`perspective(1200px) rotateY(${Math.max(-3,Math.min(3,e.gamma/12))}deg) rotateX(${Math.max(-3,Math.min(3,e.beta/18))}deg)`},{passive:true});setup3d();if(!reduce)raf=requestAnimationFrame(loop);if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',startMotion);else startMotion();setTimeout(()=>{if(!done)revealFinal()},12000);
+  /* ---------- vCard ---------- */
+  function esc(s){ return String(s).replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\n/g,'\\n'); }
+  function fold(l){
+    var o = l.slice(0,75); l = l.slice(75);
+    while (l.length){ o += '\r\n ' + l.slice(0,74); l = l.slice(74); }
+    return o;
+  }
+  function photoB64(){
+    try{
+      var im = $('#photo');
+      if (!im || !im.complete || !im.naturalWidth || im.style.display === 'none') return '';
+      var c = document.createElement('canvas'), S = 256;
+      c.width = S; c.height = S;
+      var cc = c.getContext('2d');
+      var sw = Math.min(im.naturalWidth, im.naturalHeight);
+      cc.drawImage(im, (im.naturalWidth - sw)/2, (im.naturalHeight - sw)/2, sw, sw, 0, 0, S, S);
+      var d = c.toDataURL('image/jpeg', .85);
+      return d.indexOf('base64,') > -1 ? d.split('base64,')[1] : '';
+    }catch(e){ return ''; }
+  }
+  function buildVcf(){
+    var lines = [
+      'BEGIN:VCARD',
+      'VERSION:3.0',
+      'N:TEOH;SHEAK YAO;;;',
+      'FN:Teoh Sheak Yao',
+      'ORG:' + esc('Yes Financial Bhd / Yes Trustee Bhd'),
+      'TITLE:' + esc('UM PhD Researcher / Foreign Investment / Practice Manager'),
+      'TEL;TYPE=CELL,VOICE:+60124853707',
+      'EMAIL;TYPE=INTERNET,WORK:Joshuateoh485@yahoo.com',
+      'URL:https://www.linkedin.com/in/teoh-sheak-yao-22194b133',
+      'URL:https://www.tiktok.com/@teohsheakyao'
+    ];
+    if (/^https?:/i.test(location.protocol)) lines.push('URL:' + location.origin + location.pathname);
+    lines.push('NOTE:' + esc('Faculty of Business & Economics (FBE) - CMSRL | FAR | IFAR | RFP | ShRFP | MBA'));
+    var pb = photoB64();
+    if (pb) lines.push('PHOTO;ENCODING=b;TYPE=JPEG:' + pb);
+    lines.push('END:VCARD');
+    return lines.map(fold).join('\r\n') + '\r\n';
+  }
+  function downloadVcf(){
+    var blob = new Blob([buildVcf()], { type:'text/vcard;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = 'Teoh-Sheak-Yao.vcf';
+    a.style.display = 'none';
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){ document.body.removeChild(a); URL.revokeObjectURL(url); }, 1500);
+  }
+
+  var saveBtn = $('#save'), saveLabel = $('#saveLabel'), saveIcon = $('#saveIcon');
+  var wrapHi = $('#hiWrap'), statusEl = $('#status');
+  saveBtn.addEventListener('click', function(){
+    try { downloadVcf(); } catch(e){ statusEl.textContent = 'Could not create the contact file. Please try again.'; return; }
+    saveLabel.textContent = 'Contact saved';
+    saveIcon.innerHTML = '<path d="M20 6 9 17l-5-5"/>';
+    statusEl.textContent = 'If nothing opened, please check your Downloads or Files app.';
+    if (!wrapHi.classList.contains('open')){
+      wrapHi.removeAttribute('inert');
+      wrapHi.classList.add('open');
+      setTimeout(function(){
+        try { wrapHi.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block:'center' }); } catch(e){}
+        var n = $('#hiName'); if (n) { try { n.focus({ preventScroll:true }); } catch(e){ n.focus(); } }
+      }, 420);
+    }
+  });
+
+  /* ---------- WhatsApp ---------- */
+  var form = $('#hiForm');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var nI = $('#hiName'), cI = $('#hiCo');
+    var n = nI.value.replace(/\s+/g,' ').trim();
+    var c = cI.value.replace(/\s+/g,' ').trim();
+    nI.classList.remove('bad');
+    if (!n){
+      void nI.offsetWidth; nI.classList.add('bad'); nI.focus();
+      return;
+    }
+    var msg = c ? ('Hi, I am ' + n + ' from ' + c) : ('Hi, I am ' + n);
+    var url = 'https://wa.me/60124853707?text=' + encodeURIComponent(msg);
+    var w = null;
+    try { w = window.open(url, '_blank', 'noopener'); } catch(err){}
+    if (!w) window.location.href = url;
+  });
+
+})();</script></body></html>

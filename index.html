@@ -299,7 +299,7 @@ function startMotion(){
     .to('.slab',{x:'180%',duration:.55,ease:'power4.inOut',stagger:B/2},b(4)).call(SFX.whoosh,[],b(4.5))
     .to('.scene2 .phrase',{opacity:1,scale:1,rotation:0,duration:.6,ease:'expo.out'},b(5)).call(()=>{SFX.impact();burstSparks(8)},[],b(5))
     .to('.underline path',{strokeDashoffset:0,duration:.5,ease:'power2.out'},b(5.5));
-  // Scene 3 – logo galaxy (b8) -> swirl (b9.5-b13, ~2.3s from first logo) -> logos form ONE cloud (b13) -> line down (b13.3) -> one-stop tagline (b13.9-b15.6)
+  // Scene 3 – logo galaxy (b8) -> swirl (b9.5-b13, ~2.3s from first logo) -> logos form ONE cloud (b13) -> line down (b13.3) -> one-stop tagline (b14) holds +1s -> exit
   const G={p:0,spin:0};
   tl.to('#s2',{x:-innerWidth*.5,filter:'blur(16px)',opacity:.4,duration:.32,ease:'power2.in'},b(7.35)).call(SFX.whoosh,[],b(7.35))
     .call(cut('#s3'),[],b(8)).to('.scene3 .orbit-title',{opacity:1,duration:.3},b(8))
@@ -312,20 +312,20 @@ function startMotion(){
     .fromTo('#cloudGlow',{opacity:0,scale:.75},{opacity:1,scale:1,duration:.7,ease:'expo.out'},b(13))
     .fromTo('#cloudLine',{scaleY:0},{scaleY:1,duration:.55,ease:'power3.inOut'},b(13.5))
     .fromTo('#oneStop',{opacity:0,y:18,filter:'blur(8px)'},{opacity:1,y:0,filter:'blur(0px)',duration:.6,ease:'power3.out'},b(14)).call(()=>{SFX.click();burstSparks(6)},[],b(14));
-  // Scene 4 – Licensed (b16). Content settles ~b17.5, holds ~1.3s, exits b20.3
-  tl.to('#s3',{opacity:0,scale:1.05,filter:'blur(12px)',duration:.35,ease:'power2.in'},b(15.3)).call(SFX.whoosh,[],b(15.3))
-    .call(cut('#s4'),[],b(16)).fromTo('#s4',{opacity:0},{opacity:1,duration:.3,ease:'power1.out'},b(16)).call(()=>{SFX.impact();burstSparks(8)},[],b(16))
-    .to('.lic-h',{opacity:1,y:0,duration:.6,ease:'expo.out'},b(16))
-    .fromTo('.rule',{scaleX:0},{scaleX:1,duration:.6,ease:'power2.out'},b(16.5))
-    .to('.reg',{opacity:1,y:0,scale:1,duration:.5,stagger:B/2,ease:'expo.out'},b(16.5)).call(SFX.click,[],b(16.5)).call(SFX.click,[],b(17)).call(SFX.click,[],b(17.5))
-    .to('.sweep',{x:'1050%',duration:.35},b(17.5));
-  // Scene 5 – credentials (b21). Content settles ~b23, holds ~1.3s, exits b25.8
-  tl.to('#s4',{x:-innerWidth*.5,opacity:.3,filter:'blur(18px)',duration:.35,ease:'power2.in'},b(20.25)).call(SFX.whoosh,[],b(20.25))
-    .call(cut('#s5'),[],b(21)).fromTo('#s5',{opacity:0},{opacity:1,duration:.3},b(21)).call(SFX.impact,[],b(21))
-    .to('.node',{opacity:1,scale:1,y:0,duration:.6,stagger:B/2,ease:'expo.out'},b(21.5)).call(SFX.click,[],b(21.5)).call(SFX.click,[],b(22)).call(SFX.click,[],b(22.5))
-    .to('.node',{y:-40,opacity:0,filter:'blur(14px)',duration:.4,stagger:.06,ease:'power3.in'},b(25.8))
-    .call(()=>SFX.riser(b(2)),[],b(25)).to('#flash',{opacity:.45,duration:.12,yoyo:true,repeat:1,ease:'power1.inOut'},b(26.8)).call(revealFinal,[],b(27));
-  setTimeout(()=>{if(!done)revealFinal()},16000);
+  // Scene 4 – Licensed (+1s after cloud/tagline hold). Content settles, holds ~1.3s, then scene 5
+  tl.to('#s3',{opacity:0,scale:1.05,filter:'blur(12px)',duration:.35,ease:'power2.in'},b(17.4667)).call(SFX.whoosh,[],b(17.4667))
+    .call(cut('#s4'),[],b(18.1667)).fromTo('#s4',{opacity:0},{opacity:1,duration:.3,ease:'power1.out'},b(18.1667)).call(()=>{SFX.impact();burstSparks(8)},[],b(18.1667))
+    .to('.lic-h',{opacity:1,y:0,duration:.6,ease:'expo.out'},b(18.1667))
+    .fromTo('.rule',{scaleX:0},{scaleX:1,duration:.6,ease:'power2.out'},b(18.6667))
+    .to('.reg',{opacity:1,y:0,scale:1,duration:.5,stagger:B/2,ease:'expo.out'},b(18.6667)).call(SFX.click,[],b(18.6667)).call(SFX.click,[],b(19.1667)).call(SFX.click,[],b(19.6667))
+    .to('.sweep',{x:'1050%',duration:.35},b(19.6667));
+  // Scene 5 – credentials (shifted +1s for longer cloud/tagline hold)
+  tl.to('#s4',{x:-innerWidth*.5,opacity:.3,filter:'blur(18px)',duration:.35,ease:'power2.in'},b(22.4167)).call(SFX.whoosh,[],b(22.4167))
+    .call(cut('#s5'),[],b(23.1667)).fromTo('#s5',{opacity:0},{opacity:1,duration:.3},b(23.1667)).call(SFX.impact,[],b(23.1667))
+    .to('.node',{opacity:1,scale:1,y:0,duration:.6,stagger:B/2,ease:'expo.out'},b(23.6667)).call(SFX.click,[],b(23.6667)).call(SFX.click,[],b(24.1667)).call(SFX.click,[],b(24.6667))
+    .to('.node',{y:-40,opacity:0,filter:'blur(14px)',duration:.4,stagger:.06,ease:'power3.in'},b(27.9667))
+    .call(()=>SFX.riser(b(2)),[],b(27.1667)).to('#flash',{opacity:.45,duration:.12,yoyo:true,repeat:1,ease:'power1.inOut'},b(28.9667)).call(revealFinal,[],b(29.1667));
+  setTimeout(()=>{if(!done)revealFinal()},17000);
 }
 function enter(){if(started||enter.busy)return;enter.busy=1;initAudio();if(!A.ctx||reduce){startMotion();if(A.ctx)loadBgm();return}
   let go=false;const fire=()=>{if(go)return;go=true;startMusic(A.ctx.currentTime+.08);startMotion()};loadBgm().then(fire);setTimeout(fire,1500)}

@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "horizonx": {
+      "url": "https://horizonx.so/api/mcp"
+    }
+  }
+}

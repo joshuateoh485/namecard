@@ -550,7 +550,7 @@ function scheduleLife(){
         behaviorTimers.push(setTimeout(()=>returnHome(b.id),5000)); }
     } else {
       const pair=bots.slice().sort(()=>Math.random()-0.5).slice(0,2);
-      pair.forEach((b,i)=>behaviorTimers.push(setTimeout(()=>{goLounge(b.id,'snooker');}, i*400));
+      pair.forEach((b,i)=>behaviorTimers.push(setTimeout(()=>{goLounge(b.id,'snooker');}, i*400)));
       pushFeed('ok', pair.map(p=>p.name).join(' & '), 'Snooker frame in the lounge');
       behaviorTimers.push(setTimeout(()=>pair.forEach(b=>returnHome(b.id)),6500));
     }
@@ -568,11 +568,16 @@ function scheduleLife(){
 
 function show(which){
   const dash=which==='dash';
-  $('#tabDash').setAttribute('aria-pressed',dash?'true':'false');
-  $('#tabOffice').setAttribute('aria-pressed',dash?'false':'true');
-  $('#view-dash').classList.toggle('active',dash); $('#view-dash').hidden=!dash;
-  $('#view-office').classList.toggle('active',!dash); $('#view-office').hidden=dash;
-  if(!dash) history.replaceState(null,'','#office'); else history.replaceState(null,'','#dashboard');
+  const tabDash=$('#tabDash'), tabOffice=$('#tabOffice');
+  const viewDash=$('#view-dash'), viewOffice=$('#view-office');
+  if(tabDash){ tabDash.setAttribute('aria-pressed',dash?'true':'false'); }
+  if(tabOffice){ tabOffice.setAttribute('aria-pressed',dash?'false':'true'); }
+  if(viewDash){ viewDash.classList.toggle('active',dash); viewDash.hidden=!dash; }
+  if(viewOffice){ viewOffice.classList.toggle('active',!dash); viewOffice.hidden=dash; }
+  try{
+    if(!dash) history.replaceState(null,'',location.pathname+location.search+'#office');
+    else history.replaceState(null,'',location.pathname+location.search+'#dashboard');
+  }catch(e){}
 }
 
 async function syncFromUrl(url){

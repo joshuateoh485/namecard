@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "horizonx": {
+      "url": "https://horizonx.so/api/mcp",
+      "headers": {
+        "Authorization": "Bearer ${env:HORIZONX_API_KEY}"
+      }
+    }
+  }
+}

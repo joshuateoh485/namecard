@@ -1,0 +1,622 @@
+<!doctype html><!-- © 2026 Teoh Sheak Yao. All rights reserved. Unauthorised copying prohibited. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#070b14">
+<title>Yes Financial — Command Centre &amp; AI Agent Office</title>
+<meta name="description" content="Private family office command dashboard and AI agent floor for Yes Financial Bhd / Yes Trustees Bhd.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='7' fill='%23C9A96E'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#C9A96E;--gold-soft:#e6d3a3;--cream:#f3e9d2;--ink:#070b14;--navy:#0a1424;--navy-2:#101a2c;--navy-3:#162235;
+  --line:rgba(201,169,110,.28);--line-soft:rgba(255,255,255,.1);--ok:#6fbf8a;--warn:#d4a24c;--busy:#7eb6d9;
+  --sans:'DM Sans',system-ui,sans-serif;--serif:'Playfair Display',Georgia,serif;--corm:'Cormorant Garamond',Georgia,serif;--mono:'DM Mono',ui-monospace,monospace;
+  --wood:#3a2a1c;--wood-light:#5a4330;--marble:#d8d0c2;--brass:#b8924a;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--ink);color:var(--cream);font:400 15px/1.5 var(--sans)}
+button,a{font:inherit;color:inherit}
+button{cursor:pointer}
+::selection{background:rgba(201,169,110,.35);color:#fff}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+body{overflow-x:hidden}
+
+/* Atmosphere */
+.atm{position:fixed;inset:0;pointer-events:none;z-index:0;background:
+  radial-gradient(ellipse 80% 50% at 20% -10%,rgba(201,169,110,.12),transparent 55%),
+  radial-gradient(ellipse 60% 40% at 90% 10%,rgba(30,60,110,.35),transparent 50%),
+  linear-gradient(180deg,#0c1524 0%,#070b14 45%,#05080f 100%)}
+.atm:after{content:'';position:absolute;inset:0;opacity:.35;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");mix-blend-mode:overlay}
+
+.app{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column}
+
+/* Header */
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px clamp(16px,3vw,36px);border-bottom:1px solid var(--line-soft);backdrop-filter:blur(14px);background:rgba(7,11,20,.72);position:sticky;top:0;z-index:40}
+.brand{display:flex;align-items:center;gap:14px;text-decoration:none;min-width:0}
+.brand img{height:36px;width:auto;object-fit:contain;filter:drop-shadow(0 0 12px rgba(201,169,110,.25))}
+.brand-copy{display:flex;flex-direction:column;gap:2px;min-width:0}
+.brand-copy strong{font:600 15px/1.1 var(--serif);color:#fff}
+.brand-copy span{font:500 10px/1.2 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+@media(max-width:640px){
+  .brand-copy strong{font-size:13px}
+  .brand img{height:28px}
+  .top{padding:14px 14px;align-items:flex-start}
+  .top-actions{width:100%;justify-content:space-between}
+}
+.top-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+.switch{display:inline-flex;padding:4px;border:1px solid var(--line);background:rgba(255,255,255,.03);border-radius:8px;gap:2px}
+.switch button{border:0;background:transparent;color:rgba(243,233,210,.65);padding:10px 16px;border-radius:6px;font:600 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;transition:background .25s,color .25s}
+.switch button[aria-pressed="true"]{background:linear-gradient(135deg,#e6d3a3,#c9a96e);color:var(--navy)}
+.back{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid var(--line-soft);border-radius:6px;text-decoration:none;font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(243,233,210,.75);transition:border-color .2s,color .2s}
+.back:hover{border-color:var(--gold);color:var(--cream)}
+
+/* Ticker */
+.ticker{overflow:hidden;border-bottom:1px solid var(--line-soft);background:rgba(10,20,36,.85);height:36px;display:flex;align-items:center}
+.ticker-inner{display:flex;gap:36px;white-space:nowrap;animation:marquee 42s linear infinite;font:500 11px/1 var(--mono);letter-spacing:.04em;color:rgba(243,233,210,.8);padding-left:100%}
+.ticker-inner b{color:var(--gold);font-weight:500}
+.ticker-inner .up{color:var(--ok)}.ticker-inner .dn{color:#e07a6a}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+main{flex:1;padding:22px clamp(16px,3vw,36px) 48px}
+.view{display:none;animation:fadeIn .55s cubic-bezier(.16,1,.3,1)}
+.view.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px);filter:blur(4px)}to{opacity:1;transform:none;filter:none}}
+
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin:0 0 22px;flex-wrap:wrap}
+.section-head h1{margin:0;font:600 clamp(28px,4.5vw,42px)/1.05 var(--serif);color:#fff;letter-spacing:-.01em}
+.section-head p{margin:8px 0 0;max-width:48ch;color:rgba(243,233,210,.7);font:italic 500 17px/1.35 var(--corm)}
+.live{display:inline-flex;align-items:center;gap:8px;font:500 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.live i{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 0 rgba(111,191,138,.7);animation:pulse 1.8s ease-out infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(111,191,138,.55)}70%{box-shadow:0 0 0 12px transparent}100%{box-shadow:0 0 0 0 transparent}}
+
+/* Dashboard grid */
+.dash{display:grid;grid-template-columns:1.4fr 1fr;gap:18px}
+@media(max-width:980px){.dash{grid-template-columns:1fr}}
+.panel{background:linear-gradient(160deg,rgba(22,34,53,.92),rgba(10,17,32,.96));border:1px solid var(--line);border-radius:4px;padding:20px 22px;position:relative;overflow:hidden}
+.panel:before{content:'';position:absolute;inset:0 0 auto;height:1px;background:linear-gradient(90deg,transparent,rgba(201,169,110,.55),transparent)}
+.panel h2{margin:0 0 14px;font:600 13px/1.2 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+@media(max-width:800px){.metrics{grid-template-columns:repeat(2,1fr)}}
+.metric{padding:16px 14px;background:rgba(255,255,255,.03);border:1px solid var(--line-soft);border-radius:4px;min-height:108px;display:flex;flex-direction:column;justify-content:space-between}
+.metric .k{font:500 10px/1.3 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:rgba(243,233,210,.55)}
+.metric .v{font:600 clamp(26px,3.2vw,34px)/1 var(--serif);color:#fff;margin-top:10px;font-variant-numeric:tabular-nums}
+.metric .d{margin-top:8px;font:500 12px/1.2 var(--mono);color:var(--ok)}
+.metric .d.flat{color:var(--warn)}
+.chart-wrap{height:220px;position:relative;margin-top:6px}
+.chart-wrap svg{width:100%;height:100%;display:block}
+.chart-legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;font:500 11px/1 var(--mono);color:rgba(243,233,210,.65)}
+.chart-legend span:before{content:'';display:inline-block;width:10px;height:3px;margin-right:8px;vertical-align:middle;background:var(--gold)}
+.chart-legend span:nth-child(2):before{background:var(--busy)}
+
+.side-stack{display:flex;flex-direction:column;gap:18px}
+.alloc{display:grid;gap:10px}
+.alloc-row{display:grid;grid-template-columns:110px 1fr 48px;gap:10px;align-items:center;font:500 12px/1.2 var(--sans)}
+.alloc-row .bar{height:8px;background:rgba(255,255,255,.06);border-radius:99px;overflow:hidden}
+.alloc-row .bar i{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,#8a6d3d,var(--gold));transition:width 1.2s cubic-bezier(.16,1,.3,1)}
+.alloc-row b{font:500 12px var(--mono);color:var(--gold-soft);text-align:right;font-variant-numeric:tabular-nums}
+.feed{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0;max-height:280px;overflow:auto}
+.feed li{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:start;padding:12px 0;border-bottom:1px solid var(--line-soft)}
+.feed li:last-child{border-bottom:0}
+.feed .dot{width:8px;height:8px;border-radius:50%;margin-top:6px;background:var(--gold)}
+.feed .dot.ok{background:var(--ok)}.feed .dot.busy{background:var(--busy)}.feed .dot.warn{background:var(--warn)}
+.feed strong{display:block;font:600 13px/1.3 var(--sans);color:#fff}
+.feed em{display:block;font:italic 500 13px/1.35 var(--corm);color:rgba(243,233,210,.65);margin-top:2px;font-style:italic}
+.feed time{font:500 10px/1 var(--mono);color:rgba(243,233,210,.45);letter-spacing:.06em}
+
+.markets{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:600px){.markets{grid-template-columns:1fr 1fr}}
+.mkt{padding:12px;border:1px solid var(--line-soft);background:rgba(0,0,0,.18);border-radius:4px}
+.mkt .sym{font:500 11px/1 var(--mono);letter-spacing:.1em;color:rgba(243,233,210,.55)}
+.mkt .px{font:600 20px/1.2 var(--serif);margin-top:8px;color:#fff;font-variant-numeric:tabular-nums}
+.mkt .ch{font:500 12px var(--mono);margin-top:4px}
+.mkt .ch.up{color:var(--ok)}.mkt .ch.dn{color:#e07a6a}
+
+.note{margin:14px 0 0;font:500 11px/1.5 var(--mono);color:rgba(243,233,210,.4);letter-spacing:.04em}
+
+/* ===== AGENT OFFICE ===== */
+.office-layout{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(280px,360px);gap:18px;align-items:start}
+@media(max-width:980px){.office-layout{grid-template-columns:1fr}}
+
+.floor-shell{position:relative;border:1px solid var(--line);border-radius:4px;overflow:hidden;background:
+  linear-gradient(180deg,rgba(20,36,58,.5),rgba(8,12,20,.95)),
+  repeating-linear-gradient(90deg,rgba(255,255,255,.015) 0 1px,transparent 1px 48px),
+  repeating-linear-gradient(0deg,rgba(255,255,255,.015) 0 1px,transparent 1px 48px);
+  min-height:560px}
+.floor-shell .skyline{position:absolute;left:0;right:0;top:0;height:88px;background:
+  linear-gradient(180deg,rgba(70,100,150,.25),transparent),
+  linear-gradient(90deg,transparent 8%,rgba(201,169,110,.08) 20%,transparent 35%,rgba(201,169,110,.06) 60%,transparent 80%);
+  pointer-events:none;z-index:1}
+.floor-shell .skyline:before,.floor-shell .skyline:after{content:'';position:absolute;bottom:0;width:100%;height:42px;opacity:.45;
+  background-repeat:repeat-x;background-size:120px 42px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='42' viewBox='0 0 120 42'%3E%3Cpath fill='%230a1424' d='M0 42V18h10v-8h8v8h6V8h12v10h8V14h10v12h8V10h14v16h10V18h16v24z'/%3E%3Crect x='14' y='20' width='3' height='3' fill='%23C9A96E' opacity='.55'/%3E%3Crect x='42' y='16' width='3' height='3' fill='%23C9A96E' opacity='.4'/%3E%3Crect x='78' y='22' width='3' height='3' fill='%23C9A96E' opacity='.5'/%3E%3C/svg%3E")}
+.floor-shell .skyline:after{opacity:.25;transform:scaleX(-1);bottom:6px}
+
+.floor{position:relative;z-index:2;padding:28px 18px 24px;display:grid;grid-template-columns:1.1fr 1.3fr 1fr;grid-template-rows:auto auto auto;gap:14px;min-height:560px}
+@media(max-width:720px){.floor{grid-template-columns:1fr;min-height:0}}
+
+.room{position:relative;border:1px solid rgba(201,169,110,.22);background:
+  linear-gradient(145deg,rgba(58,42,28,.35),rgba(16,26,44,.85));
+  border-radius:3px;padding:12px;min-height:140px;overflow:hidden;transition:border-color .25s,box-shadow .25s}
+.room:hover,.room.active{border-color:rgba(201,169,110,.55);box-shadow:0 0 0 1px rgba(201,169,110,.2),0 18px 40px rgba(0,0,0,.35)}
+.room-label{position:absolute;top:10px;left:12px;font:500 9px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:rgba(201,169,110,.75);z-index:2}
+.room.reception{grid-column:1;grid-row:1}
+.room.trading{grid-column:2;grid-row:1 / span 2;min-height:300px}
+.room.research{grid-column:3;grid-row:1}
+.room.vault{grid-column:1;grid-row:2}
+.room.board{grid-column:3;grid-row:2}
+.room.suite{grid-column:1 / -1;grid-row:3;min-height:150px;background:linear-gradient(90deg,rgba(58,42,28,.4),rgba(16,26,44,.9) 40%,rgba(20,40,70,.5))}
+.room:after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(201,169,110,.04),transparent 28%);opacity:.9}
+@media(max-width:720px){.room.trading,.room.reception,.room.research,.room.vault,.room.board,.room.suite{grid-column:auto;grid-row:auto;min-height:160px}}
+
+/* Room furniture */
+.desk{position:absolute;background:linear-gradient(180deg,#5a4330,#3a2a1c);border:1px solid rgba(184,146,74,.35);border-radius:2px;box-shadow:0 8px 16px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.08)}
+.desk.wide{width:42%;height:38px;left:28%;bottom:28%}
+.desk.corner{width:36%;height:34px;left:18%;top:42%}
+.monitor{position:absolute;background:#0b1220;border:1px solid rgba(201,169,110,.35);border-radius:2px;overflow:hidden}
+.monitor:before{content:'';position:absolute;inset:3px;background:linear-gradient(180deg,rgba(126,182,217,.25),rgba(201,169,110,.08));animation:scan 3.2s linear infinite}
+@keyframes scan{0%{opacity:.35;transform:translateY(-30%)}50%{opacity:.7}100%{opacity:.35;transform:translateY(40%)}}
+.lamp{position:absolute;width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#ffe8b0,#c9a96e 60%,transparent 70%);box-shadow:0 0 18px rgba(201,169,110,.65);animation:glow 2.8s ease-in-out infinite alternate}
+@keyframes glow{from{filter:brightness(.85)}to{filter:brightness(1.25)}}
+.bookshelf{position:absolute;right:10px;top:34px;bottom:12px;width:22px;background:repeating-linear-gradient(180deg,#4a3424 0 8px,#c9a96e55 8px 9px,#2c1e14 9px 14px);border:1px solid rgba(201,169,110,.25);opacity:.85}
+.vault-door{position:absolute;left:50%;top:42%;width:64px;height:64px;margin:-20px 0 0 -32px;border-radius:50%;border:3px solid var(--brass);background:radial-gradient(circle at 40% 35%,#4a3424,#1a120c 70%);box-shadow:inset 0 0 0 8px #2a1c12,0 0 28px rgba(201,169,110,.28)}
+.vault-door:before{content:'';position:absolute;inset:10px;border-radius:50%;border:1px dashed rgba(201,169,110,.45)}
+.vault-door:after{content:'';position:absolute;left:50%;top:50%;width:12px;height:12px;margin:-6px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold)}
+.chair{position:absolute;width:16px;height:16px;border-radius:50% 50% 4px 4px;background:linear-gradient(180deg,#2a3344,#151c28);border:1px solid rgba(201,169,110,.25);box-shadow:0 4px 8px rgba(0,0,0,.35)}
+.plant{position:absolute;width:14px;height:22px;background:radial-gradient(ellipse at 50% 30%,#3d6b4f,#1a3024 70%);border-radius:40% 40% 20% 20%;opacity:.75}
+.plant:after{content:'';position:absolute;left:4px;right:4px;bottom:-4px;height:6px;background:#3a2a1c;border-radius:2px}
+.clock{position:absolute;top:12px;right:12px;width:28px;height:28px;border-radius:50%;border:1px solid rgba(201,169,110,.45);background:#0c1420;box-shadow:inset 0 0 0 2px #1a2436}
+.clock:before,.clock:after{content:'';position:absolute;left:50%;top:50%;background:var(--gold);transform-origin:bottom center}
+.clock:before{width:1px;height:8px;margin:-8px 0 0 0}
+.clock:after{width:1px;height:6px;margin:-6px 0 0 0;transform:rotate(90deg);transform-origin:bottom center;opacity:.7}
+.ticker-wall{position:absolute;left:10%;right:10%;top:38px;height:20px;background:#081018;border:1px solid rgba(201,169,110,.3);overflow:hidden;font:500 9px/20px var(--mono);color:var(--ok);white-space:nowrap;z-index:1}
+.ticker-wall span{display:inline-block;padding-left:100%;animation:marquee 18s linear infinite;line-height:20px}
+.rug{position:absolute;left:12%;right:12%;bottom:18%;height:28%;border:1px solid rgba(201,169,110,.2);background:
+  radial-gradient(ellipse at 50% 50%,rgba(201,169,110,.12),transparent 70%),
+  repeating-linear-gradient(45deg,rgba(201,169,110,.05) 0 6px,transparent 6px 12px);border-radius:2px}
+.table{position:absolute;left:50%;top:48%;width:46%;height:36px;margin-left:-23%;background:linear-gradient(180deg,#6a5038,#3a2a1c);border:1px solid rgba(184,146,74,.4);border-radius:40px;box-shadow:0 10px 20px rgba(0,0,0,.3)}
+
+/* Agents */
+.agent{position:absolute;z-index:5;display:flex;flex-direction:column;align-items:center;gap:4px;border:0;background:transparent;padding:0;width:auto;transition:transform .25s}
+.agent:hover,.agent:focus-visible{transform:translateY(-3px)}
+.agent .avatar{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font:700 11px/1 var(--mono);color:var(--navy);background:linear-gradient(145deg,#e6d3a3,#c9a96e);border:2px solid rgba(255,255,255,.2);box-shadow:0 6px 16px rgba(0,0,0,.4),0 0 0 0 rgba(201,169,110,.4);position:relative}
+.agent[data-status="working"] .avatar{animation:agentPulse 2.4s ease-out infinite}
+.agent[data-status="alert"] .avatar{box-shadow:0 6px 16px rgba(0,0,0,.4),0 0 0 3px rgba(212,162,76,.55)}
+@keyframes agentPulse{0%,100%{box-shadow:0 6px 16px rgba(0,0,0,.4),0 0 0 0 rgba(111,191,138,.5)}50%{box-shadow:0 6px 16px rgba(0,0,0,.4),0 0 0 8px transparent}}
+.agent .tag{font:600 9px/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--cream);background:rgba(7,11,20,.82);border:1px solid var(--line);padding:4px 7px;border-radius:3px;white-space:nowrap;max-width:110px;overflow:hidden;text-overflow:ellipsis}
+.agent .status{width:7px;height:7px;border-radius:50%;position:absolute;right:-1px;bottom:-1px;border:2px solid var(--navy);background:var(--ok)}
+.agent[data-status="idle"] .status{background:#7a8494}
+.agent[data-status="busy"] .status{background:var(--busy)}
+.agent[data-status="alert"] .status{background:var(--warn)}
+.agent.selected .avatar{outline:2px solid #fff;outline-offset:2px}
+
+/* Positions inside rooms */
+#ag-haven{left:42%;bottom:42%}
+#ag-atlas{left:22%;top:48%}
+#ag-meridian{right:18%;top:52%}
+#ag-cipher{left:28%;bottom:30%}
+#ag-ledger{left:38%;bottom:22%}
+#ag-harbor{left:48%;top:38%}
+
+.walk{animation:walk bob 4s ease-in-out infinite alternate}
+@keyframes bob{from{transform:translate(0,0)}to{transform:translate(8px,-4px)}}
+@media(prefers-reduced-motion:reduce){
+  .ticker-inner,.ticker-wall span,.agent[data-status="working"] .avatar,.monitor:before,.lamp,.live i,.walk,.view{animation:none!important}
+  .alloc-row .bar i{transition:none}
+}
+
+/* Inspector */
+.inspector{border:1px solid var(--line);border-radius:4px;background:linear-gradient(160deg,rgba(22,34,53,.95),rgba(10,17,32,.98));padding:20px;position:sticky;top:88px;min-height:420px}
+@media(max-width:980px){.inspector{position:relative;top:auto;min-height:0;order:-1}}
+.inspector.empty{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:10px;color:rgba(243,233,210,.6)}
+.inspector.empty h2{margin:0;font:600 24px/1.15 var(--serif);color:#fff}
+.inspector.empty p{margin:0;font:italic 500 16px/1.4 var(--corm);max-width:28ch}
+.insp-head{display:flex;gap:14px;align-items:center;margin-bottom:16px}
+.insp-head .big{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font:700 16px var(--mono);color:var(--navy);background:linear-gradient(145deg,#e6d3a3,#c9a96e)}
+.insp-head h2{margin:0;font:600 22px/1.15 var(--serif);color:#fff}
+.insp-head .role{font:500 11px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-top:4px}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:99px;border:1px solid var(--line);font:500 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--gold-soft);margin-top:8px}
+.badge i{width:6px;height:6px;border-radius:50%;background:var(--ok)}
+.insp-body h3{margin:18px 0 8px;font:600 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:rgba(243,233,210,.5)}
+.insp-body p{margin:0;font:italic 500 16px/1.45 var(--corm);color:rgba(243,233,210,.82)}
+.tasks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.tasks li{padding:10px 12px;border:1px solid var(--line-soft);background:rgba(255,255,255,.03);border-radius:3px;font:500 13px/1.35 var(--sans);color:#fff}
+.tasks li small{display:block;margin-top:4px;font:500 11px/1.3 var(--mono);color:rgba(243,233,210,.5)}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.kpis div{padding:12px;border:1px solid var(--line-soft);border-radius:3px;background:rgba(0,0,0,.15)}
+.kpis b{display:block;font:600 20px/1 var(--serif);color:#fff;font-variant-numeric:tabular-nums}
+.kpis span{font:500 10px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:rgba(243,233,210,.5)}
+
+.foot{padding:18px clamp(16px,3vw,36px) 28px;border-top:1px solid var(--line-soft);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font:500 10px/1.6 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(243,233,210,.4)}
+.foot a{color:rgba(243,233,210,.65);text-decoration:none;border-bottom:1px solid rgba(201,169,110,.35)}
+
+.path{stroke-dasharray:420;stroke-dashoffset:420;animation:draw 2.2s cubic-bezier(.16,1,.3,1) forwards .2s}
+@keyframes draw{to{stroke-dashoffset:0}}
+.area{opacity:0;animation:fadeArea 1.2s ease forwards .8s}
+@keyframes fadeArea{to{opacity:1}}
+</style>
+</head>
+<body>
+<div class="atm" aria-hidden="true"></div>
+<div class="app">
+  <header class="top">
+    <a class="brand" href="index.html" aria-label="Yes Financial home">
+      <img src="logo.png" alt="" width="90" height="36" onerror="this.style.display='none'">
+      <span class="brand-copy">
+        <strong>Private Family Office Centre</strong>
+        <span>Yes Financial · Yes Trustees</span>
+      </span>
+    </a>
+    <div class="top-actions">
+      <div class="switch" role="tablist" aria-label="Centre view">
+        <button type="button" id="tabDash" role="tab" aria-selected="true" aria-pressed="true" aria-controls="view-dash">Dashboard</button>
+        <button type="button" id="tabOffice" role="tab" aria-selected="false" aria-pressed="false" aria-controls="view-office">Agent Office</button>
+      </div>
+      <a class="back" href="index.html">← Namecard</a>
+    </div>
+  </header>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-inner" id="ticker"></div>
+  </div>
+
+  <main>
+    <!-- DASHBOARD -->
+    <section class="view active" id="view-dash" role="tabpanel" aria-labelledby="tabDash">
+      <div class="section-head">
+        <div>
+          <h1>Command Dashboard</h1>
+          <p>A live-feeling pulse of the private family office — portfolios, households, and the agents working the floor.</p>
+        </div>
+        <div class="live"><i></i> Demo feed · illustrative</div>
+      </div>
+
+      <div class="metrics" id="metrics">
+        <div class="metric"><span class="k">Assets under advice</span><div class="v" data-count="2.84" data-prefix="RM " data-suffix="B" data-decimals="2">0</div><div class="d up">+4.2% YTD</div></div>
+        <div class="metric"><span class="k">Households served</span><div class="v" data-count="186" data-decimals="0">0</div><div class="d up">+12 this quarter</div></div>
+        <div class="metric"><span class="k">Trust structures</span><div class="v" data-count="74" data-decimals="0">0</div><div class="d flat">Steady book</div></div>
+        <div class="metric"><span class="k">Agents on duty</span><div class="v" data-count="6" data-decimals="0">0</div><div class="d up">4 working · 1 alert</div></div>
+      </div>
+
+      <div class="dash">
+        <div class="panel">
+          <h2>Portfolio trajectory</h2>
+          <div class="chart-wrap" aria-hidden="true">
+            <svg viewBox="0 0 640 220" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="gArea" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#C9A96E" stop-opacity=".35"/>
+                  <stop offset="1" stop-color="#C9A96E" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <g stroke="rgba(255,255,255,.06)" stroke-width="1">
+                <line x1="0" y1="40" x2="640" y2="40"/><line x1="0" y1="90" x2="640" y2="90"/>
+                <line x1="0" y1="140" x2="640" y2="140"/><line x1="0" y1="190" x2="640" y2="190"/>
+              </g>
+              <path class="area" d="M0,160 C60,150 100,145 140,130 C190,108 220,120 280,95 C340,70 380,85 440,60 C500,38 560,55 640,42 L640,220 L0,220 Z" fill="url(#gArea)"/>
+              <path class="path" d="M0,160 C60,150 100,145 140,130 C190,108 220,120 280,95 C340,70 380,85 440,60 C500,38 560,55 640,42" fill="none" stroke="#C9A96E" stroke-width="2.5"/>
+              <path class="path" style="animation-delay:.55s" d="M0,175 C80,170 120,165 180,155 C250,140 300,150 360,125 C430,95 520,110 640,88" fill="none" stroke="#7eb6d9" stroke-width="1.5" stroke-dasharray="6 6" opacity=".85"/>
+            </svg>
+          </div>
+          <div class="chart-legend"><span>Composite book</span><span>Benchmark sleeve</span></div>
+          <p class="note">Illustrative demo series — not live client performance.</p>
+        </div>
+
+        <div class="side-stack">
+          <div class="panel">
+            <h2>Allocation mix</h2>
+            <div class="alloc" id="alloc">
+              <div class="alloc-row"><span>Equities</span><div class="bar"><i data-w="38"></i></div><b>38%</b></div>
+              <div class="alloc-row"><span>Fixed income</span><div class="bar"><i data-w="24"></i></div><b>24%</b></div>
+              <div class="alloc-row"><span>Alternatives</span><div class="bar"><i data-w="18"></i></div><b>18%</b></div>
+              <div class="alloc-row"><span>Cash &amp; liquidity</span><div class="bar"><i data-w="12"></i></div><b>12%</b></div>
+              <div class="alloc-row"><span>Insurance wrappers</span><div class="bar"><i data-w="8"></i></div><b>8%</b></div>
+            </div>
+          </div>
+          <div class="panel">
+            <h2>Market pulse</h2>
+            <div class="markets" id="markets"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:18px">
+        <h2>Agent activity</h2>
+        <ul class="feed" id="feed"></ul>
+      </div>
+    </section>
+
+    <!-- AGENT OFFICE -->
+    <section class="view" id="view-office" role="tabpanel" aria-labelledby="tabOffice" hidden>
+      <div class="section-head">
+        <div>
+          <h1>AI Agent Office</h1>
+          <p>A private investment floor — desks, research, compliance vault, and board suite — staffed by specialised AI agents.</p>
+        </div>
+        <div class="live"><i></i> Floor live</div>
+      </div>
+
+      <div class="office-layout">
+        <div class="floor-shell" aria-label="Investment office floor plan">
+          <div class="skyline" aria-hidden="true"></div>
+          <div class="floor">
+            <div class="room reception" data-room="reception">
+              <span class="room-label">Reception · Concierge</span>
+              <div class="plant" style="left:10%;bottom:18%" aria-hidden="true"></div>
+              <div class="desk wide" aria-hidden="true"></div>
+              <div class="chair" style="left:46%;bottom:18%" aria-hidden="true"></div>
+              <div class="lamp" style="left:58%;bottom:48%" aria-hidden="true"></div>
+              <button type="button" class="agent" id="ag-haven" data-agent="haven" data-status="working" aria-label="Haven, Client Concierge">
+                <span class="avatar">HV<span class="status"></span></span>
+                <span class="tag">Haven</span>
+              </button>
+            </div>
+
+            <div class="room trading" data-room="trading">
+              <span class="room-label">Trading · Portfolio floor</span>
+              <div class="clock" aria-hidden="true"></div>
+              <div class="ticker-wall" aria-hidden="true"><span>KLCI 1,612.4 ▲ · STI 3,421.1 ▲ · HSI 18,204 ▼ · S&amp;P 5,288 ▲ · GOLD 2,341 · USDMYR 4.47 · · · </span></div>
+              <div class="desk corner" aria-hidden="true"></div>
+              <div class="monitor" style="left:20%;top:58%;width:28px;height:20px" aria-hidden="true"></div>
+              <div class="monitor" style="left:32%;top:56%;width:28px;height:22px" aria-hidden="true"></div>
+              <div class="monitor" style="left:44%;top:58%;width:26px;height:18px" aria-hidden="true"></div>
+              <div class="lamp" style="left:55%;top:44%" aria-hidden="true"></div>
+              <div class="chair" style="left:30%;top:68%" aria-hidden="true"></div>
+              <div class="desk" style="width:40%;height:36px;right:12%;bottom:22%" aria-hidden="true"></div>
+              <div class="monitor" style="right:22%;bottom:42%;width:30px;height:22px" aria-hidden="true"></div>
+              <div class="monitor" style="right:14%;bottom:40%;width:26px;height:20px" aria-hidden="true"></div>
+              <div class="chair" style="right:28%;bottom:12%" aria-hidden="true"></div>
+              <button type="button" class="agent walk" id="ag-atlas" data-agent="atlas" data-status="working" aria-label="Atlas, Portfolio Strategist">
+                <span class="avatar">AT<span class="status"></span></span>
+                <span class="tag">Atlas</span>
+              </button>
+              <button type="button" class="agent" id="ag-meridian" data-agent="meridian" data-status="busy" aria-label="Meridian, Market Intelligence">
+                <span class="avatar">ME<span class="status"></span></span>
+                <span class="tag">Meridian</span>
+              </button>
+            </div>
+
+            <div class="room research" data-room="research">
+              <span class="room-label">Research library</span>
+              <div class="bookshelf" aria-hidden="true"></div>
+              <div class="desk" style="width:48%;height:34px;left:16%;bottom:26%" aria-hidden="true"></div>
+              <div class="chair" style="left:32%;bottom:12%" aria-hidden="true"></div>
+              <div class="lamp" style="left:40%;bottom:48%" aria-hidden="true"></div>
+              <div class="monitor" style="left:28%;bottom:48%;width:34px;height:22px" aria-hidden="true"></div>
+              <button type="button" class="agent" id="ag-cipher" data-agent="cipher" data-status="working" aria-label="Cipher, Research &amp; Due Diligence">
+                <span class="avatar">CI<span class="status"></span></span>
+                <span class="tag">Cipher</span>
+              </button>
+            </div>
+
+            <div class="room vault" data-room="vault">
+              <span class="room-label">Compliance vault</span>
+              <div class="vault-door" aria-hidden="true"></div>
+              <button type="button" class="agent" id="ag-ledger" data-agent="ledger" data-status="alert" aria-label="Ledger, Compliance &amp; Trust">
+                <span class="avatar">LE<span class="status"></span></span>
+                <span class="tag">Ledger</span>
+              </button>
+            </div>
+
+            <div class="room board" data-room="board">
+              <span class="room-label">Strategy boardroom</span>
+              <div class="table" aria-hidden="true"></div>
+              <div class="chair" style="left:28%;top:42%" aria-hidden="true"></div>
+              <div class="chair" style="right:28%;top:42%" aria-hidden="true"></div>
+              <div class="chair" style="left:46%;bottom:18%" aria-hidden="true"></div>
+              <div class="lamp" style="left:50%;top:30%;margin-left:-5px" aria-hidden="true"></div>
+              <button type="button" class="agent" id="ag-harbor" data-agent="harbor" data-status="idle" aria-label="Harbor, Estate &amp; Succession">
+                <span class="avatar">HA<span class="status"></span></span>
+                <span class="tag">Harbor</span>
+              </button>
+            </div>
+
+            <div class="room suite" data-room="suite">
+              <span class="room-label">Private client suite · Family office lounge</span>
+              <div class="rug" aria-hidden="true"></div>
+              <div class="plant" style="right:12%;bottom:22%" aria-hidden="true"></div>
+              <div class="desk" style="width:18%;height:32px;left:8%;bottom:30%" aria-hidden="true"></div>
+              <div class="lamp" style="left:16%;bottom:48%" aria-hidden="true"></div>
+              <p style="position:absolute;right:20px;bottom:18px;margin:0;font:italic 500 15px/1.3 var(--corm);color:rgba(243,233,210,.55);max-width:32ch;text-align:right">Wood, brass, and quiet screens — an investment house, not a server farm.</p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="inspector empty" id="inspector" aria-live="polite">
+          <h2>Select an agent</h2>
+          <p>Tap a desk on the floor to review mandate, live tasks, and coverage metrics.</p>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <span>© 2026 Teoh Sheak Yao · Yes Financial Bhd / Yes Trustees Bhd</span>
+    <span><a href="index.html">Digital namecard</a> · Demo UI · No live trading</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+'use strict';
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $=s=>document.querySelector(s),$$=s=>Array.from(document.querySelectorAll(s));
+
+const AGENTS={
+  haven:{name:'Haven',initials:'HV',role:'Client Concierge',status:'working',statusLabel:'Greeting & scheduling',
+    blurb:'Owns first contact, meeting prep, and household relationship memory — the front desk of the family office.',
+    tasks:[
+      {t:'Confirm KL family office briefing',s:'Tomorrow 10:00 · Suite'},
+      {t:'Prep welcome pack for new household',s:'Documents · pending signature'},
+      {t:'WhatsApp follow-up queue',s:'3 threads open'}
+    ],
+    kpis:[{v:'98%',l:'Response SLA'},{v:'12',l:'Meetings booked'}]},
+  atlas:{name:'Atlas',initials:'AT',role:'Portfolio Strategist',status:'working',statusLabel:'Rebalancing sleeve B',
+    blurb:'Runs multi-asset allocation, provider panel routing, and rebalance proposals across the advised book.',
+    tasks:[
+      {t:'Equity overweight trim — ASEAN',s:'Draft for review'},
+      {t:'Map Amundi / BlackRock sleeves',s:'Panel sync'},
+      {t:'Risk budget check · UHNW book',s:'In progress'}
+    ],
+    kpis:[{v:'38%',l:'Equity weight'},{v:'6',l:'Proposals today'}]},
+  meridian:{name:'Meridian',initials:'ME',role:'Market Intelligence',status:'busy',statusLabel:'Scanning regional tape',
+    blurb:'Watches local and offshore markets, FX, and macro headlines that matter to Malaysian family offices.',
+    tasks:[
+      {t:'USDMYR move brief',s:'Alert threshold near'},
+      {t:'SC circular digest',s:'Queued'},
+      {t:'Gold correlation note',s:'Drafting'}
+    ],
+    kpis:[{v:'24',l:'Signals / day'},{v:'3',l:'Priority alerts'}]},
+  cipher:{name:'Cipher',initials:'CI',role:'Research & Due Diligence',status:'working',statusLabel:'Fund DD pack',
+    blurb:'Builds manager notes, product comparisons, and due-diligence packs from the firm’s local & offshore panel.',
+    tasks:[
+      {t:'Schroders vs Principal comparison',s:'40% complete'},
+      {t:'Private credit memo refresh',s:'Research library'},
+      {t:'FIMM product checklist',s:'Compliance handoff'}
+    ],
+    kpis:[{v:'9',l:'Memos open'},{v:'2.1h',l:'Avg pack time'}]},
+  ledger:{name:'Ledger',initials:'LE',role:'Compliance & Trust',status:'alert',statusLabel:'KYC refresh due',
+    blurb:'Guards licensing posture, KYC/AML cadence, and trust documentation for Yes Trustees workflows.',
+    tasks:[
+      {t:'KYC refresh — household #148',s:'Action required'},
+      {t:'Trustee minute draft',s:'Yes Trustees'},
+      {t:'SC / BNM calendar sync',s:'This week'}
+    ],
+    kpis:[{v:'2',l:'Open alerts'},{v:'100%',l:'Licence checks'}]},
+  harbor:{name:'Harbor',initials:'HA',role:'Estate & Succession',status:'idle',statusLabel:'Standing by',
+    blurb:'Models succession paths, will & trust alignment, and cross-border estate conversations for the board suite.',
+    tasks:[
+      {t:'Gen-2 education brief',s:'Scheduled Fri'},
+      {t:'Cross-border holding sketch',s:'On hold'},
+      {t:'Philanthropy vehicle options',s:'Library'}
+    ],
+    kpis:[{v:'14',l:'Estate plans'},{v:'5',l:'Active trusts'}]}
+};
+
+const FEED=[
+  {dot:'ok',title:'Atlas',body:'Posted ASEAN equity trim proposal for sleeve B.',time:'2m'},
+  {dot:'warn',title:'Ledger',body:'Flagged KYC refresh for household #148.',time:'6m'},
+  {dot:'busy',title:'Meridian',body:'USDMYR approached watchband — brief prepared.',time:'11m'},
+  {dot:'ok',title:'Haven',body:'Confirmed Private Suite briefing for tomorrow.',time:'18m'},
+  {dot:'ok',title:'Cipher',body:'Uploaded Schroders / Principal comparison draft.',time:'27m'},
+  {dot:'busy',title:'Harbor',body:'Queued Gen-2 education brief for Friday board.',time:'41m'}
+];
+
+const MARKETS=[
+  {sym:'KLCI',px:'1,612.40',ch:'+0.42%',dir:'up'},
+  {sym:'STI',px:'3,421.10',ch:'+0.18%',dir:'up'},
+  {sym:'HSI',px:'18,204.00',ch:'−0.55%',dir:'dn'},
+  {sym:'S&P 500',px:'5,288.20',ch:'+0.31%',dir:'up'},
+  {sym:'GOLD',px:'2,341.00',ch:'+0.22%',dir:'up'},
+  {sym:'USDMYR',px:'4.472',ch:'−0.08%',dir:'dn'}
+];
+
+const TICKER=['KLCI 1,612.40 <span class="up">▲ 0.42%</span>','STI 3,421.10 <span class="up">▲ 0.18%</span>','HSI 18,204 <span class="dn">▼ 0.55%</span>','S&P 5,288 <span class="up">▲ 0.31%</span>','GOLD 2,341 <span class="up">▲</span>','USDMYR 4.472','AIA · Allianz · Amundi · BlackRock · Fidelity · HSBC · JPMorgan · Maybank · Schroders · UBS','Yes Financial · Yes Trustees · Private Family Office Centre'];
+
+/* Ticker */
+(function(){
+  const el=$('#ticker');
+  const html=TICKER.map(t=>`<span><b>·</b> ${t}</span>`).join('')+TICKER.map(t=>`<span><b>·</b> ${t}</span>`).join('');
+  el.innerHTML=html;
+})();
+
+/* Markets */
+(function(){
+  $('#markets').innerHTML=MARKETS.map(m=>`<div class="mkt"><div class="sym">${m.sym}</div><div class="px">${m.px}</div><div class="ch ${m.dir}">${m.ch}</div></div>`).join('');
+})();
+
+/* Feed */
+(function(){
+  $('#feed').innerHTML=FEED.map(f=>`<li><span class="dot ${f.dot}"></span><div><strong>${f.title}</strong><em>${f.body}</em></div><time>${f.time}</time></li>`).join('');
+})();
+
+/* Count-up metrics */
+function animateCount(el){
+  const target=parseFloat(el.dataset.count);
+  const decimals=+el.dataset.decimals||0;
+  const prefix=el.dataset.prefix||'';
+  const suffix=el.dataset.suffix||'';
+  if(reduce){el.textContent=prefix+target.toFixed(decimals)+suffix;return}
+  const dur=1400;const t0=performance.now();
+  function frame(now){
+    const p=Math.min(1,(now-t0)/dur);
+    const eased=1-Math.pow(1-p,3);
+    el.textContent=prefix+(target*eased).toFixed(decimals)+suffix;
+    if(p<1)requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+}
+$$('#metrics .v').forEach(animateCount);
+
+/* Allocation bars */
+requestAnimationFrame(()=>{
+  $$('#alloc .bar i').forEach(i=>{i.style.width=(i.dataset.w||0)+'%'});
+});
+
+/* Tabs */
+const tabDash=$('#tabDash'),tabOffice=$('#tabOffice');
+const viewDash=$('#view-dash'),viewOffice=$('#view-office');
+function show(which){
+  const dash=which==='dash';
+  tabDash.setAttribute('aria-pressed',dash?'true':'false');
+  tabDash.setAttribute('aria-selected',dash?'true':'false');
+  tabOffice.setAttribute('aria-pressed',dash?'false':'true');
+  tabOffice.setAttribute('aria-selected',dash?'false':'true');
+  viewDash.classList.toggle('active',dash);
+  viewOffice.classList.toggle('active',!dash);
+  viewDash.hidden=!dash;viewOffice.hidden=dash;
+  if(!dash)history.replaceState(null,'','#office');
+  else history.replaceState(null,'','#dashboard');
+}
+tabDash.addEventListener('click',()=>show('dash'));
+tabOffice.addEventListener('click',()=>show('office'));
+if(location.hash==='#office')show('office');
+
+/* Agent inspector */
+const inspector=$('#inspector');
+function renderAgent(id){
+  const a=AGENTS[id];if(!a)return;
+  $$('.agent').forEach(el=>el.classList.toggle('selected',el.dataset.agent===id));
+  $$('.room').forEach(r=>r.classList.toggle('active',!!r.querySelector(`[data-agent="${id}"]`)));
+  inspector.classList.remove('empty');
+  inspector.innerHTML=`
+    <div class="insp-head">
+      <div class="big">${a.initials}</div>
+      <div>
+        <h2>${a.name}</h2>
+        <div class="role">${a.role}</div>
+        <div class="badge"><i style="background:${a.status==='alert'?'var(--warn)':a.status==='busy'?'var(--busy)':a.status==='idle'?'#7a8494':'var(--ok)'}"></i>${a.statusLabel}</div>
+      </div>
+    </div>
+    <div class="insp-body">
+      <h3>Mandate</h3>
+      <p>${a.blurb}</p>
+      <h3>On the desk</h3>
+      <ul class="tasks">${a.tasks.map(x=>`<li>${x.t}<small>${x.s}</small></li>`).join('')}</ul>
+      <h3>Coverage</h3>
+      <div class="kpis">${a.kpis.map(k=>`<div><b>${k.v}</b><span>${k.l}</span></div>`).join('')}</div>
+    </div>`;
+}
+$$('.agent').forEach(btn=>{
+  btn.addEventListener('click',()=>renderAgent(btn.dataset.agent));
+});
+
+/* Soft live feed churn */
+if(!reduce){
+  setInterval(()=>{
+    const feed=$('#feed');if(!feed||!feed.children.length)return;
+    const first=feed.children[0];
+    feed.appendChild(first);
+  },8000);
+}
+
+/* Prefetch hash deep-link agent */
+const q=new URLSearchParams(location.search).get('agent');
+if(q&&AGENTS[q]){show('office');renderAgent(q)}
+})();
+</script>
+</body>
+</html>
